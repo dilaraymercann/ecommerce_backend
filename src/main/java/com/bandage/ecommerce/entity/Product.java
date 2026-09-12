@@ -32,10 +32,15 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
+    @Column(name = "store_id")
+    private Long storeId;
+
     @Column(nullable = false)
+    @Builder.Default
     private Double rating = 0.0;
 
     @Column(name = "sell_count", nullable = false)
+    @Builder.Default
     private Integer sellCount = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
