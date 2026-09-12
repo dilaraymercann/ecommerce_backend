@@ -5,7 +5,7 @@ import com.bandage.ecommerce.dto.ProductListResponse;
 import com.bandage.ecommerce.dto.ProductResponse;
 import com.bandage.ecommerce.entity.Product;
 import com.bandage.ecommerce.repository.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
+import com.bandage.ecommerce.exception.ResourceNotFoundException;
 import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -123,11 +123,9 @@ public class ProductService {
                 productRepository
                         .findById(productId)
                         .orElseThrow(
-                                () ->
-                                        new EntityNotFoundException(
-                                                "Product not found with id: "
-                                                        + productId
-                                        )
+                                () -> new ResourceNotFoundException(
+                                        "Product not found with id: " + productId
+                                )
                         );
 
         return mapToResponse(product);
